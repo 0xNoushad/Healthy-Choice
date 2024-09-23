@@ -13,12 +13,15 @@ import { Facebook, Instagram, Twitter, Upload, Search, Zap, ThumbsUp, Menu } fro
 
 type Section = 'home' | 'profile' | 'howItWorks'
 
+/* eslint-disable @typescript-eslint/no-empty-interface */
+
 interface HeaderProps {
   activeSection: Section
   setActiveSection: (section: Section) => void
   mobileMenuOpen: boolean
   setMobileMenuOpen: (open: boolean) => void
 }
+
 
 const navItems: { name: string; section: Section }[] = [
   { name: 'Home', section: 'home' },
