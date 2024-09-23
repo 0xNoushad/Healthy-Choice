@@ -9,35 +9,24 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Switch } from "@/components/ui/switch"
 import { Facebook, Instagram, Twitter, Upload, Search, Zap, ThumbsUp, Menu } from 'lucide-react'
 
-export default function HealthyChoicesApp() {
-  const [activeSection, setActiveSection] = useState('home')
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+ 
 
-  return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-br from-green-50 to-blue-50">
-      <Header 
-        activeSection={activeSection} 
-        setActiveSection={setActiveSection}
-        mobileMenuOpen={mobileMenuOpen}
-        setMobileMenuOpen={setMobileMenuOpen}
-      />
-      <main className="flex-grow container mx-auto px-4 py-8">
-        {activeSection === 'home' && <Home />}
-        {activeSection === 'profile' && <Profile />}
-        {activeSection === 'howItWorks' && <HowItWorks />}
-      </main>
-      <Footer />
-    </div>
-  )
+type Section = 'home' | 'profile' | 'howItWorks'
+
+interface HeaderProps {
+  activeSection: Section
+  setActiveSection: (section: Section) => void
+  mobileMenuOpen: boolean
+  setMobileMenuOpen: (open: boolean) => void
 }
 
-function Header({ activeSection, setActiveSection, mobileMenuOpen, setMobileMenuOpen }) {
-  const navItems = [
-    { name: 'Home', section: 'home' },
-    { name: 'Profile', section: 'profile' },
-    { name: 'How It Works', section: 'howItWorks' },
-  ]
+const navItems: { name: string; section: Section }[] = [
+  { name: 'Home', section: 'home' },
+  { name: 'Profile', section: 'profile' },
+  { name: 'How It Works', section: 'howItWorks' },
+]
 
+export function Header({ activeSection, setActiveSection, mobileMenuOpen, setMobileMenuOpen }: HeaderProps) {
   return (
     <header className="sticky top-0 bg-white bg-opacity-90 backdrop-blur-md z-10 shadow-md">
       <nav className="container mx-auto px-4 py-4">
@@ -78,6 +67,27 @@ function Header({ activeSection, setActiveSection, mobileMenuOpen, setMobileMenu
         </div>
       )}
     </header>
+  )
+}
+export default function HealthyChoicesApp() {
+  const [activeSection, setActiveSection] = useState<Section>('home')
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+
+  return (
+    <div className="min-h-screen flex flex-col bg-gradient-to-br from-green-50 to-blue-50">
+      <Header 
+        activeSection={activeSection} 
+        setActiveSection={setActiveSection}
+        mobileMenuOpen={mobileMenuOpen}
+        setMobileMenuOpen={setMobileMenuOpen}
+      />
+      <main className="flex-grow container mx-auto px-4 py-8">
+        {activeSection === 'home' && <Home />}
+        {activeSection === 'profile' && <Profile />}
+        {activeSection === 'howItWorks' && <HowItWorks />}
+      </main>
+      <Footer />
+    </div>
   )
 }
 
