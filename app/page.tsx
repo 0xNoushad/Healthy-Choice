@@ -1,4 +1,4 @@
-'use client'
+  'use client'
 
 import { useState } from 'react'
 import { Button } from "@/components/ui/button"
@@ -9,11 +9,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Switch } from "@/components/ui/switch"
 import { Facebook, Instagram, Twitter, Upload, Search, Zap, ThumbsUp, Menu } from 'lucide-react'
 
- 
-
 type Section = 'home' | 'profile' | 'howItWorks'
-
-/* eslint-disable @typescript-eslint/no-empty-interface */
 
 interface HeaderProps {
   activeSection: Section
@@ -22,14 +18,13 @@ interface HeaderProps {
   setMobileMenuOpen: (open: boolean) => void
 }
 
-
 const navItems: { name: string; section: Section }[] = [
   { name: 'Home', section: 'home' },
   { name: 'Profile', section: 'profile' },
   { name: 'How It Works', section: 'howItWorks' },
 ]
 
-export function Header({ activeSection, setActiveSection, mobileMenuOpen, setMobileMenuOpen }: HeaderProps) {
+function Header({ activeSection, setActiveSection, mobileMenuOpen, setMobileMenuOpen }: HeaderProps) {
   return (
     <header className="sticky top-0 bg-white bg-opacity-90 backdrop-blur-md z-10 shadow-md">
       <nav className="container mx-auto px-4 py-4">
@@ -70,27 +65,6 @@ export function Header({ activeSection, setActiveSection, mobileMenuOpen, setMob
         </div>
       )}
     </header>
-  )
-}
-export default function HealthyChoicesApp() {
-  const [activeSection, setActiveSection] = useState<Section>('home')
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-
-  return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-br from-green-50 to-blue-50">
-      <Header 
-        activeSection={activeSection} 
-        setActiveSection={setActiveSection}
-        mobileMenuOpen={mobileMenuOpen}
-        setMobileMenuOpen={setMobileMenuOpen}
-      />
-      <main className="flex-grow container mx-auto px-4 py-8">
-        {activeSection === 'home' && <Home />}
-        {activeSection === 'profile' && <Profile />}
-        {activeSection === 'howItWorks' && <HowItWorks />}
-      </main>
-      <Footer />
-    </div>
   )
 }
 
@@ -211,87 +185,87 @@ function Profile() {
 function ProfileForm() {
   return (
     <Card className="bg-white shadow-lg hover:shadow-xl transition-shadow duration-300">
-    <CardHeader>
-      <CardTitle className="text-2xl font-semibold text-gray-800">Health Profile</CardTitle>
-      <CardDescription>Provide your details for personalized recommendations</CardDescription>
-    </CardHeader>
-    <CardContent>
-      <form className="space-y-4">
-        <div className="space-y-2">
-          <Label htmlFor="name" className="text-lg text-gray-700">Name</Label>
-          <Input id="name" placeholder="Your name" className="text-lg" />
-        </div>
-        <div className="space-y-2">
-          <Label htmlFor="age" className="text-lg text-gray-700">Age</Label>
-          <Input id="age" type="number" placeholder="Your age" className="text-lg" />
-        </div>
-        <div className="grid grid-cols-2 gap-4">
+      <CardHeader>
+        <CardTitle className="text-2xl font-semibold text-gray-800">Health Profile</CardTitle>
+        <CardDescription>Provide your details for personalized recommendations</CardDescription>
+      </CardHeader>
+      <CardContent>
+        <form className="space-y-4">
           <div className="space-y-2">
-            <Label htmlFor="height" className="text-lg text-gray-700">Height (cm)</Label>
-            <Input id="height" type="number" placeholder="Height in cm" className="text-lg" />
+            <Label htmlFor="name" className="text-lg text-gray-700">Name</Label>
+            <Input id="name" placeholder="Your name" className="text-lg" />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="weight" className="text-lg text-gray-700">Weight (kg)</Label>
-            <Input id="weight" type="number" placeholder="Weight in kg" className="text-lg" />
+            <Label htmlFor="age" className="text-lg text-gray-700">Age</Label>
+            <Input id="age" type="number" placeholder="Your age" className="text-lg" />
           </div>
-        </div>
-        <div className="space-y-2">
-          <Label htmlFor="activity-level" className="text-lg text-gray-700">Activity Level</Label>
-          <Select>
-            <SelectTrigger id="activity-level">
-              <SelectValue placeholder="Select activity level" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="sedentary">Sedentary (little to no exercise)</SelectItem>
-              <SelectItem value="light">Lightly active (light exercise 1-3 days/week)</SelectItem>
-              <SelectItem value="moderate">Moderately active (moderate exercise 3-5 days/week)</SelectItem>
-              <SelectItem value="very">Very active (hard exercise 6-7 days/week)</SelectItem>
-              <SelectItem value="extra">Extra active (very hard exercise & physical job)</SelectItem>
-            </SelectContent>
-          </Select>
-        </div>
-        <div className="space-y-2">
-          <Label htmlFor="dietary-preferences" className="text-lg text-gray-700">Dietary Preferences</Label>
-          <Select>
-            <SelectTrigger id="dietary-preferences">
-              <SelectValue placeholder="Select your diet" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="omnivore">Omnivore</SelectItem>
-              <SelectItem value="vegetarian">Vegetarian</SelectItem>
-              <SelectItem value="vegan">Vegan</SelectItem>
-              <SelectItem value="pescatarian">Pescatarian</SelectItem>
-              <SelectItem value="keto">Ketogenic</SelectItem>
-              <SelectItem value="paleo">Paleo</SelectItem>
-              <SelectItem value="mediterranean">Mediterranean</SelectItem>
-              <SelectItem value="gluten-free">Gluten-free</SelectItem>
-              <SelectItem value="dairy-free">Dairy-free</SelectItem>
-            </SelectContent>
-          </Select>
-        </div>
-        <div className="space-y-2">
-          <Label htmlFor="health-goals" className="text-lg text-gray-700">Health Goals</Label>
-          <Select>
-            <SelectTrigger id="health-goals">
-              <SelectValue placeholder="Select your primary health goal" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="weight-loss">Weight Loss</SelectItem>
-              <SelectItem value="muscle-gain">Muscle Gain</SelectItem>
-              <SelectItem value="maintenance">Maintain Current Weight</SelectItem>
-              <SelectItem value="heart-health">Improve Heart Health</SelectItem>
-              <SelectItem value="energy">Increase Energy Levels</SelectItem>
-              <SelectItem value="overall">Overall Health Improvement</SelectItem>
-            </SelectContent>
-          </Select>
-        </div>
-      </form>
-    </CardContent>
-    <CardFooter>
-      <Button className="w-full bg-green-600 hover:bg-green-700 text-white">Save Profile</Button>
-    </CardFooter>
-  </Card>
-)
+          <div className="grid grid-cols-2 gap-4">
+            <div className="space-y-2">
+              <Label htmlFor="height" className="text-lg text-gray-700">Height (cm)</Label>
+              <Input id="height" type="number" placeholder="Height in cm" className="text-lg" />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="weight" className="text-lg text-gray-700">Weight (kg)</Label>
+              <Input id="weight" type="number" placeholder="Weight in kg" className="text-lg" />
+            </div>
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="activity-level" className="text-lg text-gray-700">Activity Level</Label>
+            <Select>
+              <SelectTrigger id="activity-level">
+                <SelectValue placeholder="Select activity level" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="sedentary">Sedentary (little to no exercise)</SelectItem>
+                <SelectItem value="light">Lightly active (light exercise 1-3 days/week)</SelectItem>
+                <SelectItem value="moderate">Moderately active (moderate exercise 3-5 days/week)</SelectItem>
+                <SelectItem value="very">Very active (hard exercise 6-7 days/week)</SelectItem>
+                <SelectItem value="extra">Extra active (very hard exercise & physical job)</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="dietary-preferences" className="text-lg text-gray-700">Dietary Preferences</Label>
+            <Select>
+              <SelectTrigger id="dietary-preferences">
+                <SelectValue placeholder="Select your diet" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="omnivore">Omnivore</SelectItem>
+                <SelectItem value="vegetarian">Vegetarian</SelectItem>
+                <SelectItem value="vegan">Vegan</SelectItem>
+                <SelectItem value="pescatarian">Pescatarian</SelectItem>
+                <SelectItem value="keto">Ketogenic</SelectItem>
+                <SelectItem value="paleo">Paleo</SelectItem>
+                <SelectItem value="mediterranean">Mediterranean</SelectItem>
+                <SelectItem value="gluten-free">Gluten-free</SelectItem>
+                <SelectItem value="dairy-free">Dairy-free</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="health-goals" className="text-lg text-gray-700">Health Goals</Label>
+            <Select>
+              <SelectTrigger id="health-goals">
+                <SelectValue placeholder="Select your primary health goal" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="weight-loss">Weight Loss</SelectItem>
+                <SelectItem value="muscle-gain">Muscle Gain</SelectItem>
+                <SelectItem value="maintenance">Maintain Current Weight</SelectItem>
+                <SelectItem value="heart-health">Improve Heart Health</SelectItem>
+                <SelectItem value="energy">Increase Energy Levels</SelectItem>
+                <SelectItem value="overall">Overall Health Improvement</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+        </form>
+      </CardContent>
+      <CardFooter>
+        <Button className="w-full bg-green-600 hover:bg-green-700 text-white">Save Profile</Button>
+      </CardFooter>
+    </Card>
+  )
 }
 
 function SettingsForm() {
@@ -318,18 +292,18 @@ function SettingsForm() {
                 <SelectItem value="fr">Français</SelectItem>
               </SelectContent>
             </Select>
-            <div className="space-y-2">
-              <Label htmlFor="units" className="text-sm text-gray-600">Measurement Units</Label>
-              <Select defaultValue="metric">
-                <SelectTrigger id="units">
-                  <SelectValue placeholder="Select units" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="metric">Metric (kg, cm)</SelectItem>
-                  <SelectItem value="imperial">Imperial (lb, in)</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="units" className="text-sm text-gray-600">Measurement Units</Label>
+            <Select defaultValue="metric">
+              <SelectTrigger id="units">
+                <SelectValue placeholder="Select units" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="metric">Metric (kg, cm)</SelectItem>
+                <SelectItem value="imperial">Imperial (lb, in)</SelectItem>
+              </SelectContent>
+            </Select>
           </div>
         </form>
       </CardContent>
@@ -342,7 +316,7 @@ function SettingsForm() {
 
 function HowItWorks() {
   const steps = [
-    { title: "Upload Image", description: "Take a photo or upload an image of the product.", icon: Upload },
+    { title: "Upload Image", description: "Take a photo or upload an image of the product.",  icon: Upload },
     { title: "AI Analysis", description: "Our AI analyzes the ingredients and nutritional information.", icon: Search },
     { title: "Get Results", description: "Receive a detailed health analysis of the product.", icon: Zap },
     { title: "View Alternatives", description: "Explore healthier alternative products.", icon: ThumbsUp },
@@ -402,5 +376,27 @@ function Footer() {
         </div>
       </div>
     </footer>
+  )
+}
+
+export default function HealthyChoicesApp() {
+  const [activeSection, setActiveSection] = useState<Section>('home')
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+
+  return (
+    <div className="min-h-screen flex flex-col bg-gradient-to-br from-green-50 to-blue-50">
+      <Header 
+        activeSection={activeSection} 
+        setActiveSection={setActiveSection}
+        mobileMenuOpen={mobileMenuOpen}
+        setMobileMenuOpen={setMobileMenuOpen}
+      />
+      <main className="flex-grow container mx-auto px-4 py-8">
+        {activeSection === 'home' && <Home />}
+        {activeSection === 'profile' && <Profile />}
+        {activeSection === 'howItWorks' && <HowItWorks />}
+      </main>
+      <Footer />
+    </div>
   )
 }
